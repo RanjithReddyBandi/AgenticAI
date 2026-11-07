@@ -1,0 +1,37 @@
+Generate a Python script using LangChain that sets up a ReAct agent for a shopping assistant.
+
+Requirements:
+- Use groq and  qwen/qwen3.8-27b for LLM. apik key to be fetched from .env
+- Define four tools as a sperate file which wil be refered in the main python file. Schema is available in endpoints.json. use that while you are constructing this tool metadata file.
+  1. CatalogSearch → input: query string, output: product list.
+  2. PricingAPI → input: product_id, output: price and discounts.
+  3. InventoryAPI → input: product_id, output: stock availability.
+  4. ReviewAPI → input: product_id, output: sentiment summary.
+- The agent should:
+  - Accept a free‑form user query (e.g., "black leather jacket under $300").
+  - Call tools step by step using ReAct reasoning (Thought → Action → Observation).
+  - Filter products by budget if provided.
+  - If multiple candidates remain, generate comparisons (pros/cons).
+  - Always include a transparent explanation of reasoning.
+  - If there is no matching product provide the reason of what criteria it didnt meet
+- Output format must be structured JSON with keys:
+  {
+    "recommendations": [
+      {
+        "product_id": "...",
+        "name": "...",
+        "price": "...",
+        "discount": "...",
+        "stock": true/false,
+        "reviews": "summary"
+      }
+    ],
+    "comparisons": [
+      {
+        "product_id": "...",
+        "pros": ["..."],
+        "cons": ["..."]
+      }
+    ] OR [],
+    "explanation": "Transparent reasoning in plain language"
+  }

@@ -1,0 +1,31 @@
+Shopping Assistant Edge-Case Test Queries
+=========================================
+
+Before testing, set ECOMM_MOCK_DATA=edge in ecomm-agents/.env and restart
+the API server.
+
+1. Query: Find a black leather jacket under $100.
+   Tests: Ambiguous black/leather matches and budget boundary prices:
+   $99.99, $100.00, and $100.01. Check which products are supported by the
+   catalogue descriptions and whether the over-budget product is excluded.
+
+2. Query: Find a black leather belt under $50.
+   Tests: Whether a product priced exactly at the budget ($50.00) qualifies
+   while the similar $50.01 product does not.
+
+3. Query: Find a wallet under $40, and tell me which options are in stock.
+   Tests: Similar wallet matches, different availability states, and positive
+   versus low review ratings.
+
+4. Query: Find a brown leather jacket; compare the availability and reviews.
+   Tests: An out-of-stock match, negative review sentiment, and similar jacket
+   descriptions.
+
+5. Query: Find a purple silk hat under $100.
+   Tests: No-match behavior. The edge catalogue has no hats or products
+   described as purple or silk, so the assistant should explain that it could
+   not find a supported match.
+
+Note: Catalogue search currently returns products matching any query term,
+not necessarily every criterion. Inspect the Streamlit sidebar's LLM Debug Log
+to compare catalogue results and tool observations with the final response.

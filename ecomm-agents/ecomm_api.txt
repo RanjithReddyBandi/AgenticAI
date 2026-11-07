@@ -1,0 +1,26 @@
+Generate a FastAPI project that exposes mock ecommerce APIs with hardcoded data. 
+The project should include endpoints for:
+
+1. Product Catalogue API
+   - GET /products → returns list of products (id, name, category, description)
+   - Example products: belt, shoes, wallet, jacket
+
+2. Price API
+   - GET /price/{product_id} → returns product_id, price, currency
+
+3. Availability API
+   - GET /availability/{product_id} → returns product_id, in_stock (boolean), quantity
+
+4. Review Comments API
+   - GET /reviews/{product_id} → returns product_id, list of review comments, rating (1–5)
+
+Implementation details:
+- Use FastAPI framework
+- Hardcode sample data in dictionaries or lists
+- Return JSON responses
+- Include Pydantic models for structured responses
+- Add simple error handling for invalid product_id
+- Organize code with routers (e.g., catalogue.py, price.py, availability.py, reviews.py)
+- Provide a main.py that mounts all routers
+
+Goal: A clean FastAPI project simulating ecommerce APIs for agentic AI app development.
